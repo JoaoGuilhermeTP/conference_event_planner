@@ -38,16 +38,19 @@ export const avSlice = createSlice({
 
   reducers: {
     incrementAvQuantity: (state, action) => {
+      console.log("INCREMENT AV QUANTITY CALLED");
       const index = action.payload;
+      console.log(`ITEM INDEX: ${index}`);
       if (state[index]) {
-        return state[index].quantity++;
+        state[index].quantity++;
       }
     },
 
     decrementAvQuantity: (state, action) => {
+      console.log("DECREMENT AV QUANTITY CALLED");
       const index = action.payload;
       if (state[index]) {
-        return state[index].quantity--;
+        state[index].quantity--;
       }
     },
   },

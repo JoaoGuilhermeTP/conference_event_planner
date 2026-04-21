@@ -1,3 +1,5 @@
+import AddOnItem from "../AddOnItem/AddOnItem";
+
 const AddOnsInformation = ({avItems, addOnsTotalCost}) => {
 
   const handleIncrementAvQuantity = (index) => {};
@@ -10,11 +12,11 @@ const AddOnsInformation = ({avItems, addOnsTotalCost}) => {
           <h1> Add-ons Selection</h1>
         </div>
         <div className="addons_selection">
-          {avItems.map((item) => (
-            <div>{item.name} - {item.quantity}</div>
+          {avItems.map((item, index) => (
+            <AddOnItem key={index} index={index} item={item} />
           ))}
         </div>
-        <div className="total_cost">Total Cost:</div>
+        <div className="total_cost">Total Cost: {addOnsTotalCost}</div>
       </div>
     </div>
   );

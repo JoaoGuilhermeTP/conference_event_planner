@@ -3,6 +3,7 @@ import { incrementQuantity, decrementQuantity } from "../../store/venueSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const VenueItem = ({ item, index }) => {
+  
   const dispatch = useDispatch();
 
   const handleAddToCart = (index) => {
