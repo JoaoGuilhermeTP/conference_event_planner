@@ -12,6 +12,7 @@ const MainPage = () => {
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const venueItems = useSelector((state) => state.venue);
   const avItems = useSelector((state) => state.addOns);
+  const mealsItems = useSelector((state) => state.meals);
 
   const handleToggleItems = () => {
     console.log("handleToggleItems called");
@@ -27,7 +28,13 @@ const MainPage = () => {
     } else if (section === "addOns") {
       avItems.forEach((item) => {
         totalCost += item.cost * item.quantity
-      })
+      });
+    } else if (section === "meals") {
+      mealsItems.forEach((item) => {
+        if (item.selected) {
+          totalCost += item.cost * numberOfPeople;
+        }
+      });
     }
     return totalCost;
   };
@@ -49,6 +56,7 @@ const MainPage = () => {
   const items = getItemsFromTotalCost();
   const venueTotalCost = calculateTotalCost("venue");
   const addOnsTotalCost = calculateTotalCost("addOns");
+  const mealsTotalCost = calculateTotalCost("meals");
 
   return (
     <>
@@ -58,7 +66,7 @@ const MainPage = () => {
           <div>
             <ItemsInformation venueItems={venueItems} venueTotalCost={venueTotalCost} />
             <AddOnsInformation avItems={avItems} addOnsTotalCost={addOnsTotalCost} />
-            <MealsInformation />
+            <MealsInformation mealsItems={mealsItems} numberOfPeople={numberOfPeople} setNumberOfPeople={setNumberOfPeople} mealsTotalCost={mealsTotalCost} />
           </div>
         ) : (
           <div className="total_amount_detail">

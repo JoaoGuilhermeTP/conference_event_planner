@@ -1,6 +1,6 @@
 import React from "react";
 import { incrementQuantity, decrementQuantity } from "../../store/venueSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const VenueItem = ({ item, index }) => {
   
