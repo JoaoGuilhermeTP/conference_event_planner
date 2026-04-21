@@ -3,15 +3,14 @@ import "./MainPage.css";
 import TotalCost from "../../components/TotalCost/TotalCost";
 import NavBar from "../../components/NavBar/NavBar";
 import ItemsInformation from "../../components/ItemsInformation/ItemsInformation";
+import AddOnsInformation from "../../components/AddOnsInformation/AddOnsInformation";
+import MealsInformation from "../../components/MealsInformation/MealsInformation";
 import { useSelector, useDispatch } from "react-redux";
 
-
 const MainPage = () => {
-  
   const [showItems, setShowItems] = useState(false);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const venueItems = useSelector((state) => state.venue);
-  const dispatch = useDispatch();
 
   const handleToggleItems = () => {
     console.log("handleToggleItems called");
@@ -37,10 +36,9 @@ const MainPage = () => {
     }
   };
 
-  const handleIncrementAvQuantity = (index) => {};
-  const handleDecrementAvQuantity = (index) => {};
-  const handleMealSelection = (index) => {};
-  const getItemsFromTotalCost = () => { const items = []; };
+  const getItemsFromTotalCost = () => {
+    const items = [];
+  };
   const ItemsDisplay = ({ items }) => {};
 
   const items = getItemsFromTotalCost();
@@ -51,10 +49,15 @@ const MainPage = () => {
       <NavBar navigateToProducts={navigateToProducts} showItems={showItems} setShowItems={setShowItems} />
       <div className="main_container">
         {!showItems ? (
-          <ItemsInformation venueItems={venueItems} venueTotalCost={venueTotalCost} />
+          <div>
+            <ItemsInformation venueItems={venueItems} venueTotalCost={venueTotalCost} />
+            <AddOnsInformation />
+            <MealsInformation />
+          </div>
         ) : (
           <div className="total_amount_detail">
-            <TotalCost totalCosts={totalCosts} handleClick={handleToggleItems} ItemsDisplay={() => <ItemsDisplay items={items} />} />
+            <TotalCost totalCosts={totalCosts} handleClick={handleToggleItems} ItemsDisplay={() => <ItemsDisplay items={items} />}
+            />
           </div>
         )}
       </div>
