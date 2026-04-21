@@ -1,4 +1,4 @@
-import AboutUs from "./AboutUs/AboutUs";
+import AboutUs from "../AboutUs/AboutUs";
 
 const WelcomePage = ({showVenue, setShowVenue}) => {
 
