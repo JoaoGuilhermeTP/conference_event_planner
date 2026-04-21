@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 const MainPage = () => {
+  
   const [showItems, setShowItems] = useState(false);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const venueItems = useSelector((state) => state.venue);
@@ -16,20 +17,6 @@ const MainPage = () => {
     console.log("handleToggleItems called");
     setShowItems(!showItems);
   };
-
-  const handleIncrementAvQuantity = (index) => {};
-
-  const handleDecrementAvQuantity = (index) => {};
-
-  const handleMealSelection = (index) => {};
-
-  const getItemsFromTotalCost = () => {
-    const items = [];
-  };
-
-  const items = getItemsFromTotalCost();
-
-  const ItemsDisplay = ({ items }) => {};
 
   const calculateTotalCost = (section) => {
     let totalCost = 0;
@@ -41,8 +28,6 @@ const MainPage = () => {
     return totalCost;
   };
 
-  const venueTotalCost = calculateTotalCost("venue");
-
   const navigateToProducts = (idType) => {
     if (idType == "#venue" || idType == "#addons" || idType == "#meals") {
       if (showItems) {
@@ -51,6 +36,15 @@ const MainPage = () => {
       }
     }
   };
+
+  const handleIncrementAvQuantity = (index) => {};
+  const handleDecrementAvQuantity = (index) => {};
+  const handleMealSelection = (index) => {};
+  const getItemsFromTotalCost = () => { const items = []; };
+  const ItemsDisplay = ({ items }) => {};
+
+  const items = getItemsFromTotalCost();
+  const venueTotalCost = calculateTotalCost("venue");
 
   return (
     <>
