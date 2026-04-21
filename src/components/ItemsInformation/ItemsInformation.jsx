@@ -16,7 +16,6 @@ const ItemsInformation = ({ venueItems, venueTotalCost }) => {
               key={index}
               item={item}
               index={index}
-              venueItems={venueItems}
             />
           ))}
         </div>

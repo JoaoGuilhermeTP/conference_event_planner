@@ -11,6 +11,7 @@ const MainPage = () => {
   const [showItems, setShowItems] = useState(false);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const venueItems = useSelector((state) => state.venue);
+  const avItems = useSelector((state) => state.addOns);
 
   const handleToggleItems = () => {
     console.log("handleToggleItems called");
@@ -23,6 +24,10 @@ const MainPage = () => {
       venueItems.forEach((item) => {
         totalCost += item.cost * item.quantity;
       });
+    } else if (section === "addOns") {
+      avItems.forEach((item) => {
+        totalCost += item.cost * item.quantity
+      })
     }
     return totalCost;
   };
@@ -43,6 +48,7 @@ const MainPage = () => {
 
   const items = getItemsFromTotalCost();
   const venueTotalCost = calculateTotalCost("venue");
+  const addOnsTotalCost = calculateTotalCost("addOns");
 
   return (
     <>
@@ -51,7 +57,7 @@ const MainPage = () => {
         {!showItems ? (
           <div>
             <ItemsInformation venueItems={venueItems} venueTotalCost={venueTotalCost} />
-            <AddOnsInformation />
+            <AddOnsInformation avItems={avItems} addOnsTotalCost={addOnsTotalCost} />
             <MealsInformation />
           </div>
         ) : (

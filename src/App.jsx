@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import MainPage from "./pages/MainPage/MainPage";
-import AboutUs from "./pages/AboutUs/AboutUs";
 
 function App() {
 
