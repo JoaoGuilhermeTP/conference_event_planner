@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "./ConferenceEvent.css";
-import TotalCost from "./TotalCost";
+import "./MainPage.css";
+import TotalCost from "../../components/TotalCost/TotalCost";
+import NavBar from "../../components/NavBar/NavBar";
+import ItemsInformation from "../../components/ItemsInformation/ItemsInformation";
 import { useSelector, useDispatch } from "react-redux";
-import { incrementQuantity, decrementQuantity } from "./venueSlice";
-import ItemsInformation from "./ItemsInformation";
 
-const ConferenceEvent = () => {
+
+const MainPage = () => {
   const [showItems, setShowItems] = useState(false);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const venueItems = useSelector((state) => state.venue);
@@ -39,7 +40,7 @@ const ConferenceEvent = () => {
     }
     return totalCost;
   };
-  
+
   const venueTotalCost = calculateTotalCost("venue");
 
   const navigateToProducts = (idType) => {
@@ -53,41 +54,13 @@ const ConferenceEvent = () => {
 
   return (
     <>
-      <navbar className="navbar_event_conference">
-        <div className="company_logo">Conference Expense Planner</div>
-        <div className="left_navbar">
-          <div className="nav_links">
-            <a href="#venue" onClick={() => navigateToProducts("#venue")}>
-              Venue
-            </a>
-            <a href="#addons" onClick={() => navigateToProducts("#addons")}>
-              Add-ons
-            </a>
-            <a href="#meals" onClick={() => navigateToProducts("#meals")}>
-              Meals
-            </a>
-          </div>
-          <button
-            className="details_button"
-            onClick={() => setShowItems(!showItems)}
-          >
-            Show Details
-          </button>
-        </div>
-      </navbar>
+      <NavBar navigateToProducts={navigateToProducts} showItems={showItems} setShowItems={setShowItems} />
       <div className="main_container">
         {!showItems ? (
-          <ItemsInformation
-            venueItems={venueItems}
-            venueTotalCost={venueTotalCost}
-          />
+          <ItemsInformation venueItems={venueItems} venueTotalCost={venueTotalCost} />
         ) : (
           <div className="total_amount_detail">
-            <TotalCost
-              totalCosts={totalCosts}
-              handleClick={handleToggleItems}
-              ItemsDisplay={() => <ItemsDisplay items={items} />}
-            />
+            <TotalCost totalCosts={totalCosts} handleClick={handleToggleItems} ItemsDisplay={() => <ItemsDisplay items={items} />} />
           </div>
         )}
       </div>
@@ -95,4 +68,4 @@ const ConferenceEvent = () => {
   );
 };
 
-export default ConferenceEvent;
+export default MainPage;

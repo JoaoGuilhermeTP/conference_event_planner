@@ -1,13 +1,30 @@
 import React from "react";
+import { incrementQuantity, decrementQuantity } from "../../store/venueSlice";
+import { useSelector, useDispatch } from "react-redux";
 
-const VenueItem = ({
-  item,
-  index,
-  venueItems,
-  handleRemoveFromCart,
-  remainingAuditoriumQuantity,
-  handleAddToCart,
-}) => {
+const VenueItem = ({ item, index, venueItems }) => {
+  const dispatch = useDispatch();
+
+  const currentAuditoriumQuantity = venueItems.find((item) => item.name === "Auditorium Hall (Capacity:200)").quantity;
+
+  const remainingAuditoriumQuantity = 3 - currentAuditoriumQuantity;
+
+  const handleAddToCart = (index) => {
+    if (
+      venueItems[index].name === "Auditorium Hall (Capacity:200)" &&
+      venueItems[index].quantity >= 3
+    ) {
+      return;
+    }
+    dispatch(incrementQuantity(index));
+  };
+
+  const handleRemoveFromCart = (index) => {
+    if (venueItems[index].quantity > 0) {
+      dispatch(decrementQuantity(index));
+    }
+  };
+
   return (
     <div className="venue_main">
       <div className="img">

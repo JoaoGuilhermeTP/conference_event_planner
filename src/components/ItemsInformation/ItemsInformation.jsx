@@ -1,34 +1,7 @@
 import React from "react";
-import VenueItem from "./VenueItem";
-import { incrementQuantity, decrementQuantity } from "./venueSlice";
-import { useSelector, useDispatch } from "react-redux";
+import VenueItem from "../VenueItem/VenueItem";
 
-const ItemsInformation = ({
-  venueItems,
-  venueTotalCost,
-}) => {
-  const dispatch = useDispatch();
-
-  const remainingAuditoriumQuantity =
-    3 -
-    venueItems.find((item) => item.name === "Auditorium Hall (Capacity:200)")
-      .quantity;
-
-  const handleAddToCart = (index) => {
-    if (
-      venueItems[index].name === "Auditorium Hall (Capacity:200)" &&
-      venueItems[index].quantity >= 3
-    ) {
-      return;
-    }
-    dispatch(incrementQuantity(index));
-  };
-
-  const handleRemoveFromCart = (index) => {
-    if (venueItems[index].quantity > 0) {
-      dispatch(decrementQuantity(index));
-    }
-  };
+const ItemsInformation = ({ venueItems, venueTotalCost }) => {
 
   return (
     <div className="items-information">
@@ -43,9 +16,6 @@ const ItemsInformation = ({
               item={item}
               index={index}
               venueItems={venueItems}
-              handleRemoveFromCart={handleRemoveFromCart}
-              remainingAuditoriumQuantity={remainingAuditoriumQuantity}
-              handleAddToCart={handleAddToCart}
             />
           ))}
         </div>
