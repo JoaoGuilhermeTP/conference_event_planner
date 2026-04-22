@@ -5,6 +5,7 @@ const MealItem = ({ item, index }) => {
   const dispatch = useDispatch();
 
   const handleMealSelection = (index) => {
+    console.log("HANDLE MEAL SELECTION TRIGGERED");
     dispatch(toggleMealSelection(index));
   };
 
