@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./MainPage.css";
-import TotalCost from "../../components/TotalCost/TotalCost";
+import TotalCost from "../TotalCost/TotalCost";
 import NavBar from "../../components/NavBar/NavBar";
 import ItemsInformation from "../../components/ItemsInformation/ItemsInformation";
 import AddOnsInformation from "../../components/AddOnsInformation/AddOnsInformation";
@@ -50,13 +50,39 @@ const MainPage = () => {
 
   const getItemsFromTotalCost = () => {
     const items = [];
+    venueItems.forEach((item) => {
+      if (item.quantity > 0) {
+        items.push({...item, type: "venue"});
+      }
+    });
+    avItems.forEach((item) => {
+      if (item.quantity > 0) {
+        if (!items.some((i) => i.name === item.name && i.type === "av")) {
+          items.push({...item, type: "av"})
+        }
+      }
+    });
+    mealsItems.forEach((item) => {
+      if (item.selected) {
+        items.push({...item, type: "meals", numberOfPeople: numberOfPeople});
+      };
+    })
+    return items;
   };
+
   const ItemsDisplay = ({ items }) => {};
 
   const items = getItemsFromTotalCost();
   const venueTotalCost = calculateTotalCost("venue");
   const addOnsTotalCost = calculateTotalCost("addOns");
   const mealsTotalCost = calculateTotalCost("meals");
+
+  const totalCosts = {
+    venue: venueTotalCost,
+    av: addOnsTotalCost,
+    meals: mealsTotalCost,
+  };
+  console.log(totalCosts);
 
   return (
     <>
